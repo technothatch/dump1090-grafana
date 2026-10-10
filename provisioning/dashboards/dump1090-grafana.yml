@@ -1,0 +1,20 @@
+# Dashboard provisioning for dump1090-grafana.
+#
+# options.path is where you keep dashboards/*.json. The value below matches
+# the dump1090-stack compose mount and scripts/import.sh --mode provision;
+# change it if you keep this repository somewhere else. Dashboards are loaded
+# every updateIntervalSeconds, and UI edits are disabled because the JSON in
+# git is the source of truth.
+apiVersion: 1
+
+providers:
+  - name: dump1090-grafana
+    orgId: 1
+    folder: ADS-B
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    updateIntervalSeconds: 30
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

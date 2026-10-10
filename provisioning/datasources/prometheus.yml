@@ -1,0 +1,20 @@
+# Prometheus datasource for dump1090-grafana.
+#
+# The uid must stay `prometheus`: every dashboard resolves its ${DS_PROMETHEUS}
+# template variable against this uid when Grafana loads the JSON from disk, and
+# scripts/import.sh relies on the same default. Point `url` at whatever serves
+# the dump1090-exporter metrics (see dump1090-exporter README, default port
+# 9702 behind your Prometheus).
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+    jsonData:
+      timeInterval: 15s
+      httpMethod: POST
